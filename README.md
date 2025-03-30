@@ -15,7 +15,7 @@ mvn spring-boot:run
 
 * Tambien puedes ejecutarlo con el comando java directamente
 ```
-java -jar target/api-creditcard-ms-0.0.1-SNAPSHOT.jar
+java -jar target/api-creditcard-ms-1.0.0-SNAPSHOT.jar
 ```
 
 Una vez que la aplicacion se ejecuta visualizaras algo asi:
