@@ -1,6 +1,6 @@
 # Spring Boot - API Credit Card
 
-Esta es una aplicación Java / Maven / Spring Boot (version 1.0.0) para almacenamiento y consulta de tarjeta de credito, usando para los datos sensibles Cifrado de Datos en Reposo, Tokenización y Enmascaramiento. Adicional usa Spring Security para la autenticación, autorización y accesos a los endPoints.
+Esta es una aplicación Java / Maven / Spring Boot (version 1.0.0) para almacenamiento y consulta de números de tarjetas de crédito, usando para los datos sensibles Cifrado de Datos en Reposo, Tokenización y Enmascaramiento. Adicional usa Spring Security para la autenticación, autorización y accesos a los endPoints.
 
 ### Ejecutar la aplicacion localmente
 
