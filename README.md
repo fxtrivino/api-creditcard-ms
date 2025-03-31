@@ -44,6 +44,11 @@ El Test de Pruebas Unitarias esta localizado en com.bci.ApiCreditcardMsApplicati
 
 ![Screenshot 2025-03-30 at 5 56 49 PM](https://github.com/user-attachments/assets/4b29b315-c5d1-4a9b-9b3c-c64a97e552ff)
 
+### Operaciones con Tarjetas de Crédito
+
+El usuario con ROL ADMIN solo podrá almacenar tarjetas de crédito, no podrá consultar tarjetas.
+El usuario con ROL USER solo podrá consultar tarjetas de crédito, no podrá almecenar tarjetas.
+
 
 ### Registro de usuario con rol ADMIN - Response: HTTP 201 (Created)
 
@@ -111,6 +116,8 @@ curl -X 'POST' \
   "cardNumber": "4111111111111111"
 }'
 ```
+![Screenshot 2025-03-31 at 6 53 35 AM](https://github.com/user-attachments/assets/424f2fda-b067-4d27-a853-beecb1450114)
+
 
 ### Almacenar Tarjeta de Crédito con Token de USER - Response: HTTP 403 (Forbidden)
 
