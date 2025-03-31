@@ -49,56 +49,80 @@ El Test de Pruebas Unitarias esta localizado en com.bci.ApiCreditcardMsApplicati
 
 ```
 curl -X 'POST' \
-  'http://localhost:8080/api/v1/auth/register?username=admin&password=admin123&role=ADMIN' \
+  'http://localhost:8080/api/v1/auth/register' \
   -H 'accept: */*' \
-  -d ''
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "admin",
+  "password": "admin123",
+  "role": "ADMIN"
+}'
 ```
 
 ### Registro de usuario con rol USER - Response: HTTP 201 (Created)
 
 ```
 curl -X 'POST' \
-  'http://localhost:8080/api/v1/auth/register?username=xtrivino&password=xtrivino123&role=USER' \
+  'http://localhost:8080/api/v1/auth/register' \
   -H 'accept: */*' \
-  -d ''
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "xtrivino",
+  "password": "xtrivino123",
+  "role": "USER"
+}'
 ```
 
 ### Login de usuario con rol ADMIN - Response: HTTP 200 (OK)
 
 ```
 curl -X 'POST' \
-  'http://localhost:8080/api/v1/auth/login?username=admin&password=admin123' \
+  'http://localhost:8080/api/v1/auth/login' \
   -H 'accept: */*' \
-  -d ''
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "admin",
+  "password": "admin123"
+}'
 ```
 
 ### Login de usuario con rol USER - Response: HTTP 200 (OK)
 
 ```
 curl -X 'POST' \
-  'http://localhost:8080/api/v1/auth/login?username=xtrivino&password=xtrivino123' \
+  'http://localhost:8080/api/v1/auth/login' \
   -H 'accept: */*' \
-  -d ''
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "xtrivino",
+  "password": "xtrivino123"
+}'
 ```
 
-### Almecenar Tarjeta de Credito con Token de ADMIN - Response: HTTP 201 (Created)
+### Almacenar Tarjeta de Credito con Token de ADMIN - Response: HTTP 201 (Created)
 
 ```
 curl -X 'POST' \
-  'http://localhost:8080/api/v1/creditcard/store?cardNumber=2343543423345456' \
+  'http://localhost:8080/api/v1/creditcard/store' \
   -H 'accept: */*' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0MzM4OTU5NCwiZXhwIjoxNzQzNDc1OTk0fQ.Rz3qM_aJpp0JdUrJS_fQYmuedhRv4ubDzEuB_Z8KqIk' \
-  -d ''
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0MzQyMTI1NCwiZXhwIjoxNzQzNTA3NjU0fQ.INQrjChKCHv7KOoXM6J7nVe_RFG5CpuUCH4GMJrFGOU' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "cardNumber": "4111111111111111"
+}'
 ```
 
-### Almecenar Tarjeta de Crédito con Token de USER - Response: HTTP 403 (Forbidden)
+### Almacenar Tarjeta de Crédito con Token de USER - Response: HTTP 403 (Forbidden)
 
 ```
 curl -X 'POST' \
-  'http://localhost:8080/api/v1/creditcard/store?cardNumber=2343543423345456' \
+  'http://localhost:8080/api/v1/creditcard/store' \
   -H 'accept: */*' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4dHJpdmlubyIsImlhdCI6MTc0MzM4OTgyOSwiZXhwIjoxNzQzNDc2MjI5fQ.XXI81fZigEmbpkMDlssiAY6MoO8fkKIj9-wwOsbQZOg' \
-  -d ''
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4dHJpdmlubyIsImlhdCI6MTc0MzQyMTMxNCwiZXhwIjoxNzQzNTA3NzE0fQ.11jJyK-ZWAPbU4uLd-lcTC8SOIKKsA9UjySpBChLF8U' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "cardNumber": "4111111111111111"
+}'
 ```
 
 ### Consulta de tarjeta de Crédito con Token ADMIN - Response: HTTP 403 (Forbidden)
