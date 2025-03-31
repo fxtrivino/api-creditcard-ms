@@ -1,12 +1,15 @@
 package com.bci.controlller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bci.entity.CreditCardDto;
 import com.bci.service.CreditCardService;
 
 @RestController
@@ -17,15 +20,17 @@ public class CreditCardController {
     public CreditCardController(CreditCardService service) {
         this.service = service;
     }
-
+    
     @PostMapping("/store")
-    public String storeCard(@RequestParam String cardNumber) throws Exception {
-        return "Tarjeta almacenada con token: " + service.storeCard(cardNumber);
+    public ResponseEntity<Object> storeCard(@RequestBody CreditCardDto creditCardDto) {
+    	String token = service.storeCard(creditCardDto);
+    	return new ResponseEntity<>("Tarjeta almacenada con token: " + token, HttpStatus.CREATED);
     }
 
     @GetMapping("/get/{token}")
-    public String getCard(@PathVariable String token) throws Exception {
-        return "Tarjeta: " + service.getCard(token);
+    public ResponseEntity<Object> getCard(@PathVariable String token) {
+    	String tarjeta = service.getCard(token);
+        return new ResponseEntity<>("Tarjeta: " + tarjeta, HttpStatus.OK);
     }
 }
 

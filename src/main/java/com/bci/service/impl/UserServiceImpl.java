@@ -1,4 +1,4 @@
-package com.bci.service;
+package com.bci.service.impl;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
@@ -8,20 +8,18 @@ import org.springframework.stereotype.Service;
 import com.bci.entity.Role;
 import com.bci.repository.UserRepository;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.Set;
 import java.util.stream.Collectors;
 import com.bci.entity.User;
+import com.bci.entity.UserDto;
 
 
-@Slf4j
 @Service
-public class UserService implements UserDetailsService {
+public class UserServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
@@ -31,32 +29,22 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
         
-        log.info("username = {}", user.getUsername());
-        log.info("password = {}", user.getPassword());
-        
-        for (Role rol : user.getRoles()) {
-        	log.info("rol id = {}" , rol.getId());
-			log.info("rol name = {}" , rol.getName());
-			
-		}
-        
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
                 user.getRoles().stream()
                     .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
-                    //.map(role -> new SimpleGrantedAuthority(role.getName()))
                     .collect(Collectors.toSet())
         );
     }
 
-    public User registerUser(String username, String password, String role) {
+    public User registerUser(UserDto userDto) {
         User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setUsername(userDto.getUsername());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         Role userRole = new Role();
-        userRole.setName(role);
+        userRole.setName(userDto.getRole().toUpperCase());
 
         user.setRoles(Set.of(userRole));
         return userRepository.save(user);

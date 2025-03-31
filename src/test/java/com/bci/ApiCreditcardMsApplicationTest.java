@@ -4,13 +4,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.bci.entity.CreditCardDto;
 import com.bci.entity.Role;
 import com.bci.entity.User;
 import com.bci.filter.JwtAuthenticationFilter;
 import com.bci.repository.CreditCardRepository;
 import com.bci.repository.UserRepository;
-import com.bci.service.CreditCardService;
-import com.bci.service.UserService;
+import com.bci.service.impl.CreditCardServiceImpl;
+import com.bci.service.impl.UserServiceImpl;
 import com.bci.util.JwtUtil;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -52,10 +53,10 @@ class ApiCreditcardMsApplicationTest {
     private CreditCardRepository creditCardRepository;
 
     @InjectMocks
-    private CreditCardService creditCardService;
+    private CreditCardServiceImpl creditCardService;
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @InjectMocks
     private JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -111,9 +112,13 @@ class ApiCreditcardMsApplicationTest {
     @Test
     void testStoreCard() {
         String cardNumber = "1234567812345678";
+        
+        CreditCardDto creditCardDto = new CreditCardDto();
+        creditCardDto.setCardNumber(cardNumber);
+        
         when(creditCardRepository.save(any())).thenReturn(null);
         
-        assertDoesNotThrow(() -> creditCardService.storeCard(cardNumber));
+        assertDoesNotThrow(() -> creditCardService.storeCard(creditCardDto));
         verify(creditCardRepository, times(1)).save(any());
     }
     

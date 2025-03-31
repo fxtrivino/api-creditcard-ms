@@ -41,5 +41,15 @@ public class JwtUtil {
             throw new AuthenticationCredentialsNotFoundException("JWT token compact of handler are invalid.");
         }
     }
+    
+    public static Boolean hasTokenExpired(String token) {
+        return Jwts.parser()
+                .setSigningKey(KEY)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration()
+                .before(new Date());
+    }
 }
 

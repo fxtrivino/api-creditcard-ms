@@ -1,34 +1,39 @@
 package com.bci.controlller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import com.bci.service.UserService;
+import com.bci.entity.LoginDto;
+import com.bci.entity.UserDto;
+import com.bci.service.impl.UserServiceImpl;
 import com.bci.util.JwtUtil;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserServiceImpl userService) {
         this.userService = userService;
     }
-
+    
     @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password, @RequestParam String role) {
-        userService.registerUser(username, password, role.toUpperCase());
-        return "Usuario registrado con éxito";
+    public ResponseEntity<Object> register(@RequestBody UserDto userDto) {
+        userService.registerUser(userDto);
+        return new ResponseEntity<>("Usuario registrado con éxito", HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        UserDetails userDetails = userService.loadUserByUsername(username);
-        if (new BCryptPasswordEncoder().matches(password, userDetails.getPassword())) {
-            return JwtUtil.generateToken(username);
+    public ResponseEntity<Object> login(@RequestBody LoginDto loginDto) {
+        UserDetails userDetails = userService.loadUserByUsername(loginDto.getUsername());
+        if (new BCryptPasswordEncoder().matches(loginDto.getPassword(), userDetails.getPassword())) {
+            String token = JwtUtil.generateToken(loginDto.getUsername());
+            return new ResponseEntity<>(token, HttpStatus.OK);
         }
-        return "Credenciales inválidas";
+        return new ResponseEntity<>("Credenciales inválidas", HttpStatus.FORBIDDEN);
     }
 }
 
