@@ -145,9 +145,9 @@ curl -X 'GET' \
 
 ```
 curl -X 'GET' \
-  'http://localhost:8080/api/v1/creditcard/get/ae33ddd658ab4ce2' \
+  'http://localhost:8080/api/v1/creditcard/get/062645e79849411d' \
   -H 'accept: */*' \
-  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4dHJpdmlubyIsImlhdCI6MTc0MzM4OTgyOSwiZXhwIjoxNzQzNDc2MjI5fQ.XXI81fZigEmbpkMDlssiAY6MoO8fkKIj9-wwOsbQZOg'
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4dHJpdmlubyIsImlhdCI6MTc0MzQyMTMxNCwiZXhwIjoxNzQzNTA3NzE0fQ.11jJyK-ZWAPbU4uLd-lcTC8SOIKKsA9UjySpBChLF8U'
 ```
 ![Screenshot 2025-03-31 at 6 56 10 AM](https://github.com/user-attachments/assets/efc8bb9d-76f7-4a87-bc86-e3f0d7e74fd9)
 
