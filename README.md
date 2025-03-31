@@ -104,7 +104,7 @@ curl -X 'POST' \
 }'
 ```
 
-### Almacenar Tarjeta de Credito como ADMIN - Response: HTTP 201 (Created)
+### Almacenar tarjeta de crédito como ADMIN - Response: HTTP 201 (Created)
 
 ```
 curl -X 'POST' \
@@ -119,7 +119,7 @@ curl -X 'POST' \
 ![Screenshot 2025-03-31 at 6 53 35 AM](https://github.com/user-attachments/assets/424f2fda-b067-4d27-a853-beecb1450114)
 
 
-### Almacenar Tarjeta de Crédito como USER - Response: HTTP 403 (Forbidden)
+### Almacenar tarjeta de crédito como USER - Response: HTTP 403 (Forbidden)
 
 ```
 curl -X 'POST' \
@@ -132,7 +132,7 @@ curl -X 'POST' \
 }'
 ```
 
-### Consulta de tarjeta de Crédito como ADMIN - Response: HTTP 403 (Forbidden)
+### Consulta de tarjeta de crédito como ADMIN - Response: HTTP 403 (Forbidden)
 
 ```
 curl -X 'GET' \
@@ -141,7 +141,7 @@ curl -X 'GET' \
   -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0MzM4OTU5NCwiZXhwIjoxNzQzNDc1OTk0fQ.Rz3qM_aJpp0JdUrJS_fQYmuedhRv4ubDzEuB_Z8KqIk'
 ```
 
-### Consulta de tarjeta de Crédito como USER - Response: HTTP 200 (OK)
+### Consulta de tarjeta de crédito como USER - Response: HTTP 200 (OK)
 
 ```
 curl -X 'GET' \
