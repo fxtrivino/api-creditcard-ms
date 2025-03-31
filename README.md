@@ -104,7 +104,7 @@ curl -X 'POST' \
 }'
 ```
 
-### Almacenar Tarjeta de Credito con Token de ADMIN - Response: HTTP 201 (Created)
+### Almacenar Tarjeta de Credito como ADMIN - Response: HTTP 201 (Created)
 
 ```
 curl -X 'POST' \
@@ -119,7 +119,7 @@ curl -X 'POST' \
 ![Screenshot 2025-03-31 at 6 53 35 AM](https://github.com/user-attachments/assets/424f2fda-b067-4d27-a853-beecb1450114)
 
 
-### Almacenar Tarjeta de Crédito con Token de USER - Response: HTTP 403 (Forbidden)
+### Almacenar Tarjeta de Crédito como USER - Response: HTTP 403 (Forbidden)
 
 ```
 curl -X 'POST' \
@@ -132,7 +132,7 @@ curl -X 'POST' \
 }'
 ```
 
-### Consulta de tarjeta de Crédito con Token ADMIN - Response: HTTP 403 (Forbidden)
+### Consulta de tarjeta de Crédito como ADMIN - Response: HTTP 403 (Forbidden)
 
 ```
 curl -X 'GET' \
@@ -141,7 +141,7 @@ curl -X 'GET' \
   -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0MzM4OTU5NCwiZXhwIjoxNzQzNDc1OTk0fQ.Rz3qM_aJpp0JdUrJS_fQYmuedhRv4ubDzEuB_Z8KqIk'
 ```
 
-### Consulta de tarjeta de Crédito con Token USER - Response: HTTP 200 (OK)
+### Consulta de tarjeta de Crédito como USER - Response: HTTP 200 (OK)
 
 ```
 curl -X 'GET' \
@@ -149,6 +149,8 @@ curl -X 'GET' \
   -H 'accept: */*' \
   -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4dHJpdmlubyIsImlhdCI6MTc0MzM4OTgyOSwiZXhwIjoxNzQzNDc2MjI5fQ.XXI81fZigEmbpkMDlssiAY6MoO8fkKIj9-wwOsbQZOg'
 ```
+![Screenshot 2025-03-31 at 6 56 10 AM](https://github.com/user-attachments/assets/efc8bb9d-76f7-4a87-bc86-e3f0d7e74fd9)
+
 
 ### Para visualizar Swagger 2 API docs
 
