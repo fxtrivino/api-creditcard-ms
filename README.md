@@ -45,95 +45,92 @@ El Test de Pruebas Unitarias esta localizado en com.bci.ApiCreditcardMsApplicati
 ![Screenshot 2025-03-30 at 5 56 49 PM](https://github.com/user-attachments/assets/4b29b315-c5d1-4a9b-9b3c-c64a97e552ff)
 
 
-### Registro de usuario - Response: HTTP 201 (Created)
+### Registro de usuario con rol ADMIN - Response: HTTP 201 (Created)
 
 ```
 curl -X 'POST' \
-  'http://localhost:8080/userManagement/v1/users' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "name": "Juan Rodriguez",
-    "email": "juan@rodriguez.org",
-    "password": "A23tara20$",
-    "phones": [
-            {
-            "number": "1234567",
-            "cityCode": "1",
-            "countryCode": "57"
-            },
-            {
-            "number": "994373861",
-            "cityCode": "12",
-            "countryCode": "58"
-            }
-    ]
-}'
+  'http://localhost:8080/api/v1/auth/register?username=admin&password=admin123&role=ADMIN' \
+  -H 'accept: */*' \
+  -d ''
 ```
 
-### Consultar la lista de usuarios - Response: HTTP 200 (OK)
+### Registro de usuario con rol USER - Response: HTTP 201 (Created)
 
 ```
-http://localhost:8080/userManagement/v1/users
+curl -X 'POST' \
+  'http://localhost:8080/api/v1/auth/register?username=xtrivino&password=xtrivino123&role=USER' \
+  -H 'accept: */*' \
+  -d ''
 ```
 
-### Consultar usuario por id - Response: HTTP 200 (OK)
+### Login de usuario con rol ADMIN - Response: HTTP 200 (OK)
 
 ```
-http://localhost:8080/userManagement/v1/users/91dc6937-b72d-4a15-9e63-76b62a12f117
+curl -X 'POST' \
+  'http://localhost:8080/api/v1/auth/login?username=admin&password=admin123' \
+  -H 'accept: */*' \
+  -d ''
 ```
 
-### Actualización de usuario - Response: HTTP 200 (OK)
+### Login de usuario con rol USER - Response: HTTP 200 (OK)
 
 ```
-curl -X 'PUT' \
-  'http://localhost:8080/userManagement/v1/users/9dda1a09-e15d-4543-a5b3-ba2003115167' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "name": "Juan Rodriguez",
-    "email": "juan3@rodriguez.org",
-    "password": "A23tara20$",
-    "phones": [
-            {
-            "number": "1234590",
-            "cityCode": "1",
-            "countryCode": "57"
-            },
-            {
-            "number": "994373876",
-            "cityCode": "12",
-            "countryCode": "58"
-            }
-    ]
-}'
+curl -X 'POST' \
+  'http://localhost:8080/api/v1/auth/login?username=xtrivino&password=xtrivino123' \
+  -H 'accept: */*' \
+  -d ''
 ```
 
-### Eliminación de usuario - Response: HTTP 204 (No Content)
+### Almecenar Tarjeta de Credito con Token de ADMIN - Response: HTTP 201 (Created)
 
 ```
-curl -X 'DELETE' \
-  'http://localhost:8080/userManagement/v1/users/ceec557c-ba25-46db-9df6-0729f86de188' \
-  -H 'accept: */*'
+curl -X 'POST' \
+  'http://localhost:8080/api/v1/creditcard/store?cardNumber=2343543423345456' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0MzM4OTU5NCwiZXhwIjoxNzQzNDc1OTk0fQ.Rz3qM_aJpp0JdUrJS_fQYmuedhRv4ubDzEuB_Z8KqIk' \
+  -d ''
+```
+
+### Almecenar Tarjeta de Crédito con Token de USER - Response: HTTP 403 (Forbidden)
+
+```
+curl -X 'POST' \
+  'http://localhost:8080/api/v1/creditcard/store?cardNumber=2343543423345456' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4dHJpdmlubyIsImlhdCI6MTc0MzM4OTgyOSwiZXhwIjoxNzQzNDc2MjI5fQ.XXI81fZigEmbpkMDlssiAY6MoO8fkKIj9-wwOsbQZOg' \
+  -d ''
+```
+
+### Consulta de tarjeta de Crédito con Token ADMIN - Response: HTTP 403 (Forbidden)
+
+```
+curl -X 'GET' \
+  'http://localhost:8080/api/v1/creditcard/get/ae33ddd658ab4ce2' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0MzM4OTU5NCwiZXhwIjoxNzQzNDc1OTk0fQ.Rz3qM_aJpp0JdUrJS_fQYmuedhRv4ubDzEuB_Z8KqIk'
+```
+
+### Consulta de tarjeta de Crédito con Token USER - Response: HTTP 200 (OK)
+
+```
+curl -X 'GET' \
+  'http://localhost:8080/api/v1/creditcard/get/ae33ddd658ab4ce2' \
+  -H 'accept: */*' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4dHJpdmlubyIsImlhdCI6MTc0MzM4OTgyOSwiZXhwIjoxNzQzNDc2MjI5fQ.XXI81fZigEmbpkMDlssiAY6MoO8fkKIj9-wwOsbQZOg'
 ```
 
 ### Para visualizar Swagger 2 API docs
 
-Ejecutar en el navegador http://localhost:8080/userManagement/v1/swagger-ui/index.html
+Ejecutar en el navegador http://localhost:8080/api/v1/swagger-ui/index.html
 
-![Screenshot 2025-03-14 at 7 16 29 PM](https://github.com/user-attachments/assets/a79bb825-1c62-48e4-b274-f0d2184c3d37)
+![Screenshot 2025-03-30 at 10 07 23 PM](https://github.com/user-attachments/assets/c5015c98-c486-4ce8-a8c4-4cd3fc36be15)
 
 
 ### Para visualizar la base H2 en memoria
 
-Ejecutar en el navegador http://localhost:8080/userManagement/v1/h2-console, usuario default es 'sa' con password en blanco.
+Ejecutar en el navegador http://localhost:8080/api/v1/h2-console/, usuario default es 'sa' con password en blanco.
 
-![Screenshot 2025-03-14 at 7 21 44 PM](https://github.com/user-attachments/assets/161a0089-e800-4ecd-b394-bd023b0daa97)
-
-
-### Arquitectura de la Aplicacion
-
-![API-User drawio (2)](https://github.com/user-attachments/assets/b742341b-8c56-4fb1-b4a6-a97aff48049b)
+![Screenshot 2025-03-30 at 10 08 36 PM](https://github.com/user-attachments/assets/5fc0c900-1e3f-477d-bd7f-a4c064843e41)
 
 
 ### Preguntas y comentarios: fxtrivino@gmail.com
