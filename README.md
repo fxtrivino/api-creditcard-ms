@@ -46,8 +46,8 @@ El Test de Pruebas Unitarias esta localizado en com.bci.ApiCreditcardMsApplicati
 
 ### Operaciones con Tarjetas de Crédito
 
-El usuario con ROL ADMIN solo podrá almacenar tarjetas de crédito, no podrá consultar tarjetas.
-El usuario con ROL USER solo podrá consultar tarjetas de crédito, no podrá almecenar tarjetas.
+El usuario con rol ADMIN solo podrá almacenar tarjetas de crédito, no podrá consultar tarjetas.
+El usuario con rol USER solo podrá consultar tarjetas de crédito, no podrá almecenar tarjetas.
 
 
 ### Registro de usuario con rol ADMIN - Response: HTTP 201 (Created)
